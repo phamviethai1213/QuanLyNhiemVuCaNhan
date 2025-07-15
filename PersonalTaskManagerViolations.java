@@ -68,4 +68,15 @@ private boolean isValidPriority(String priority) {
     }
     return true;
 }
+    private boolean isDuplicateTask(JSONArray tasks, String title, LocalDate dueDate) {
+    for (Object obj : tasks) {
+        JSONObject task = (JSONObject) obj;
+        String taskTitle = task.get("title").toString();
+        String taskDueDate = task.get("due_date").toString();
+        if (taskTitle.equalsIgnoreCase(title) && taskDueDate.equals(dueDate.format(DATE_FORMATTER))) {
+            return true;
+        }
+    }
+    return false;
+}
 }
