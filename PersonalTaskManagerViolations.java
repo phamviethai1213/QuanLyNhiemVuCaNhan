@@ -39,4 +39,33 @@ public class PersonalTaskManager {
     System.out.println("Đã thêm nhiệm vụ thành công.");
     return newTask;
     }
+    private boolean isValidTitle(String title) {
+    if (title == null || title.trim().isEmpty()) {
+        System.out.println("Lỗi: Tiêu đề không được để trống.");
+        return false;
+    }
+    return true;
+}
+
+private boolean isValidDueDate(String dueDateStr) {
+    if (dueDateStr == null || dueDateStr.trim().isEmpty()) {
+        System.out.println("Lỗi: Ngày đến hạn không được để trống.");
+        return false;
+    }
+    try {
+        LocalDate.parse(dueDateStr, DATE_FORMATTER);
+        return true;
+    } catch (DateTimeParseException e) {
+        System.out.println("Lỗi: Ngày đến hạn không hợp lệ. Định dạng đúng: yyyy-MM-dd");
+        return false;
+    }
+}
+
+private boolean isValidPriority(String priority) {
+    if (!VALID_PRIORITIES.contains(priority)) {
+        System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ. Chỉ chấp nhận: " + VALID_PRIORITIES);
+        return false;
+    }
+    return true;
+}
 }
