@@ -95,4 +95,25 @@ private boolean isValidPriority(String priority) {
     private String generateTaskId() {
     return String.valueOf(System.currentTimeMillis());
 }
+    private JSONArray loadTasksFromDb() {
+    JSONParser parser = new JSONParser();
+    try (FileReader reader = new FileReader(DB_FILE_PATH)) {
+        Object obj = parser.parse(reader);
+        if (obj instanceof JSONArray) {
+            return (JSONArray) obj;
+        }
+    } catch (IOException | ParseException e) {
+        System.err.println("Lỗi khi đọc file database: " + e.getMessage());
+    }
+    return new JSONArray();
+}
+
+private void saveTasksToDb(JSONArray tasksData) {
+    try (FileWriter file = new FileWriter(DB_FILE_PATH)) {
+        file.write(tasksData.toJSONString());
+        file.flush();
+    } catch (IOException e) {
+        System.err.println("Lỗi khi ghi file database: " + e.getMessage());
+    }
+}
 }
