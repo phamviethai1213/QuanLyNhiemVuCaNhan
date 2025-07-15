@@ -116,4 +116,9 @@ private void saveTasksToDb(JSONArray tasksData) {
         System.err.println("Lỗi khi ghi file database: " + e.getMessage());
     }
 }
+    public static void main(String[] args) {
+    PersonalTaskManager manager = new PersonalTaskManager();
+    manager.addNewTask("Học KISS", "Đọc về nguyên tắc lập trình đơn giản", "2025-07-20", "Cao");
+    manager.addNewTask("Học DRY", "Tách hàm tránh trùng lặp", "2025-07-21", "Trung bình");
+}
 }
